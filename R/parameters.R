@@ -338,14 +338,6 @@ is_parameters <- function(
 print.parameters <- function(
     x
 ) {
-    if (length(x$beta_g_x) == 1) {
-        eta_g_x_string <- paste0("[", x$beta_g_x[1], "]")
-    } else if (length(x$beta_g_x) == 2) {
-        beta_g_x_string <- paste0("[", x$beta_g_x[1], ", ", x$beta_g_x[2], "]")
-    } else {
-        beta_g_x_string <- paste0("[", x$beta_g_x[1], ", ", "..., ", x$beta_g_x[length(x$beta_g_x)], "]")
-    }
-
     cat("Parameters", "\n", sep = "")
     cat("\n", sep = "")
     cat("Number of causal G's (m): ", x$m, "\n", sep = "")
@@ -354,7 +346,7 @@ print.parameters <- function(
     cat("U intercept (alpha_u): ", x$alpha_u, "\n", sep = "")
     cat("U noise variance (sigma2_u): ", x$sigma2_u, "\n", sep = "")
     cat("X intercept (alpha_x): ", x$alpha_x, "\n", sep = "")
-    cat("Causal effect of G's on X (beta_g_x): ", beta_g_x_string, "\n", sep = "")
+    cat("Causal effect of G's on X (beta_g_x): ", format_vector(x$beta_g_x), "\n", sep = "")
     cat("Causal effect of U on X (beta_u_x): ", x$beta_u_x, "\n", sep = "")
     cat("X noise variance (sigma2_x): ", x$sigma2_x, "\n", sep = "")
     cat("Y intercept (alpha_y): ", x$alpha_y, "\n", sep = "")
