@@ -1,3 +1,4 @@
+#' @export
 calculate_parameters <- function(
     hyper_parameters,
     restrictions
@@ -50,6 +51,7 @@ calculate_parameters <- function(
     return(parameters)
 }
 
+#' @export
 define_parameters <- function(
     m,
     k,
@@ -327,6 +329,7 @@ validate_parameters_restrictions <- function(
     }
 }
 
+#' @export
 is_parameters <- function(
     x
 ) {
@@ -335,8 +338,10 @@ is_parameters <- function(
     return(result)
 }
 
+#' @export
 print.parameters <- function(
-    x
+    x,
+    ...
 ) {
     cat("Parameters", "\n", sep = "")
     cat("\n", sep = "")

@@ -102,6 +102,7 @@ validate_endogenous_variables <- function(
     }
 }
 
+#' @export
 is_endogenous_variables <- function(
     x
 ) {
@@ -110,8 +111,10 @@ is_endogenous_variables <- function(
     return(result)
 }
 
+#' @export
 print.endogenous_variables <- function(
-    x
+    x,
+    ...
 ) {
     cat("Endogenous variables", "\n", sep = "")
     cat("\n", sep = "")

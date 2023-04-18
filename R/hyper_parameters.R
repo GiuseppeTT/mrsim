@@ -1,3 +1,4 @@
+#' @export
 define_hyper_parameters <- function(
     m,
     k,
@@ -97,6 +98,7 @@ validate_hyper_parameters <- function(
     }
 }
 
+#' @export
 is_hyper_parameters <- function(
     x
 ) {
@@ -105,8 +107,10 @@ is_hyper_parameters <- function(
     return(result)
 }
 
+#' @export
 print.hyper_parameters <- function(
-    x
+    x,
+    ...
 ) {
     cat("Hyper parameters", "\n", sep = "")
     cat("\n", sep = "")

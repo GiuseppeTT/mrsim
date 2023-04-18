@@ -1,3 +1,4 @@
+#' @export
 define_restrictions <- function(
 ) {
     restrictions <- new_restrictions(
@@ -83,6 +84,7 @@ validate_restrictions <- function(
     }
 }
 
+#' @export
 is_restrictions <- function(
     x
 ) {
@@ -91,8 +93,10 @@ is_restrictions <- function(
     return(result)
 }
 
+#' @export
 print.restrictions <- function(
-    x
+    x,
+    ...
 ) {
     cat("Restrictions", "\n", sep = "")
     cat("\n", sep = "")

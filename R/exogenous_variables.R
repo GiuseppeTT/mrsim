@@ -95,6 +95,7 @@ validate_exogenous_variables <- function(
     }
 }
 
+#' @export
 is_exogenous_variables <- function(
     x
 ) {
@@ -103,8 +104,10 @@ is_exogenous_variables <- function(
     return(result)
 }
 
+#' @export
 print.exogenous_variables <- function(
-    x
+    x,
+    ...
 ) {
     cat("Exogenous variables", "\n", sep = "")
     cat("\n", sep = "")

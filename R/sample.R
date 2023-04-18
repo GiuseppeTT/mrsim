@@ -1,3 +1,4 @@
+#' @export
 generate_sample <- function(
     parameters,
     n
@@ -48,6 +49,7 @@ validate_sample <- function(
 ) {
 }
 
+#' @export
 is_sample <- function(
     x
 ) {
@@ -56,8 +58,10 @@ is_sample <- function(
     return(result)
 }
 
+#' @export
 print.sample <- function(
-    x
+    x,
+    ...
 ) {
     n <- attr(x, "n")
 
