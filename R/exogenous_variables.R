@@ -109,7 +109,11 @@ print.exogenous_variables <- function(
     x,
     ...
 ) {
-    cat("Exogenous variables", "\n", sep = "")
+    args <- list(...)
+    level <- args$level %||% 1
+    header <- paste0(rep("#", level), collapse = "")
+
+    cat(header, " Exogenou variables", "\n", sep = "")
     cat("\n", sep = "")
     cat("Raw G data (gprime): ", format_matrix(x$gprime), "\n", sep = "")
     cat("U noise (e_u): ", format_matrix(x$e_u), "\n", sep = "")

@@ -98,7 +98,11 @@ print.restrictions <- function(
     x,
     ...
 ) {
-    cat("Restrictions", "\n", sep = "")
+    args <- list(...)
+    level <- args$level %||% 1
+    header <- paste0(rep("#", level), collapse = "")
+
+    cat(header, " Restrictions", "\n", sep = "")
     cat("\n", sep = "")
     cat("G mean (mean_g): ", x$mean_g, "\n", sep = "")
     cat("G variance (var_g): ", x$var_g, "\n", sep = "")

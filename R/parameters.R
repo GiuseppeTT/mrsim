@@ -343,7 +343,11 @@ print.parameters <- function(
     x,
     ...
 ) {
-    cat("Parameters", "\n", sep = "")
+    args <- list(...)
+    level <- args$level %||% 1
+    header <- paste0(rep("#", level), collapse = "")
+
+    cat(header, " Parameters", "\n", sep = "")
     cat("\n", sep = "")
     cat("Number of causal G's (m): ", x$m, "\n", sep = "")
     cat("Number of null G's (k): ", x$k, "\n", sep = "")

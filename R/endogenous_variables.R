@@ -116,7 +116,11 @@ print.endogenous_variables <- function(
     x,
     ...
 ) {
-    cat("Endogenous variables", "\n", sep = "")
+    args <- list(...)
+    level <- args$level %||% 1
+    header <- paste0(rep("#", level), collapse = "")
+
+    cat(header, " Endogenous variables", "\n", sep = "")
     cat("\n", sep = "")
     cat("G data (g): ", format_matrix(x$g), "\n", sep = "")
     cat("U data (u): ", format_matrix(x$u), "\n", sep = "")

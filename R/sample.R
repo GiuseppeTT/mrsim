@@ -65,11 +65,15 @@ print.sample <- function(
 ) {
     n <- attr(x, "n")
 
-    cat("Sample", "\n", sep="")
+    args <- list(...)
+    level <- args$level %||% 1
+    header <- paste0(rep("#", level), collapse = "")
+
+    cat(header, " Sample", "\n", sep="")
     cat("\n", sep="")
     cat("Sample size (n): ", n, "\n", sep = "")
     cat("\n", sep="")
-    print(x$exogenous_variables)
+    print(x$exogenous_variables, level = level + 1)
     cat("\n", sep="")
-    print(x$endogenous_variables)
+    print(x$endogenous_variables, level = level + 1)
 }
