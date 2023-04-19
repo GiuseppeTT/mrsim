@@ -13,10 +13,12 @@ summarize_sample <- function(
     beta_g_x <- numeric(snp_count)
     beta_se_g_x <- numeric(snp_count)
     p_value_g_x <- numeric(snp_count)
+    f_statistic_g_x <- numeric(snp_count)
     r2_g_x <- numeric(snp_count)
     beta_g_y <- numeric(snp_count)
     beta_se_g_y <- numeric(snp_count)
     p_value_g_y <- numeric(snp_count)
+    f_statistic_g_y <- numeric(snp_count)
     r2_g_y <- numeric(snp_count)
     for (i in seq_len(snp_count)) {
         gi <- g[, i, drop = FALSE]
@@ -25,12 +27,14 @@ summarize_sample <- function(
         beta_g_x[i] <- fit_g_x$coefficients[2, "Estimate"]
         beta_se_g_x[i] <- fit_g_x$coefficients[2, "Std. Error"]
         p_value_g_x[i] <- fit_g_x$coefficients[2, "Pr(>|t|)"]
+        f_statistic_g_x[i] <- fit_g_x$fstatistic["value"]
         r2_g_x[i] <- fit_g_x$r.squared
 
         fit_g_y <- summary(lm(y ~ gi))
         beta_g_y[i] <- fit_g_y$coefficients[2, "Estimate"]
         beta_se_g_y[i] <- fit_g_y$coefficients[2, "Std. Error"]
         p_value_g_y[i] <- fit_g_y$coefficients[2, "Pr(>|t|)"]
+        f_statistic_g_y[i] <- fit_g_y$fstatistic["value"]
         r2_g_y[i] <- fit_g_y$r.squared
     }
 
@@ -40,10 +44,12 @@ summarize_sample <- function(
         beta_g_x = beta_g_x,
         beta_se_g_x = beta_se_g_x,
         p_value_g_x = p_value_g_x,
+        f_statistic_g_x = f_statistic_g_x,
         r2_g_x = r2_g_x,
         beta_g_y = beta_g_y,
         beta_se_g_y = beta_se_g_y,
         p_value_g_y = p_value_g_y,
+        f_statistic_g_y = f_statistic_g_y,
         r2_g_y = r2_g_y
     )
 
