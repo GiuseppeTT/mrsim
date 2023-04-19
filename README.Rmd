@@ -18,11 +18,11 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of mrsim is to simulate mendelian randomization (MR) data using meaningful hyper parameters.
+The goal of `mrsim` is to simulate mendelian randomization (MR) data using meaningful hyper parameters.
 
 ## Installation
 
-You can install the development version of mrsim from [GitHub](https://github.com/) with:
+You can install the development version of `mrsim` from [GitHub](https://github.com/) with
 
 ``` r
 # install.packages("devtools")
@@ -37,14 +37,16 @@ This is a basic example which shows you how to simulate three-sample MR data and
 # install.packages("MendelianRandomization")
 library(mrsim)
 
+set.seed(42)
+
 hyper_parameters <- define_hyper_parameters(
     m = 500,
     k = 500,
-    p = 0.25,
+    p = 25 / 100,
     r2_g_x = 0.01 / 100,
-    r2_u_x = 0.3,
+    r2_u_x = 30 / 100,
     r2_g_y = 0.002 / 100,
-    r2_u_y = 0.3
+    r2_u_y = 30 / 100
 )
 
 restrictions <- define_restrictions()
@@ -86,14 +88,16 @@ Alternatively, you can simulate just one sample
 # install.packages("MendelianRandomization")
 library(mrsim)
 
+set.seed(42)
+
 hyper_parameters <- define_hyper_parameters(
     m = 500,
     k = 500,
-    p = 0.25,
+    p = 25 / 100,
     r2_g_x = 0.01 / 100,
-    r2_u_x = 0.3,
+    r2_u_x = 30 / 100,
     r2_g_y = 0.002 / 100,
-    r2_u_y = 0.3
+    r2_u_y = 30 / 100
 )
 
 restrictions <- define_restrictions()

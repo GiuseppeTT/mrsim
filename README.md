@@ -6,13 +6,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of mrsim is to simulate mendelian randomization (MR) data using
-meaningful hyper parameters.
+The goal of `mrsim` is to simulate mendelian randomization (MR) data
+using meaningful hyper parameters.
 
 ## Installation
 
-You can install the development version of mrsim from
-[GitHub](https://github.com/) with:
+You can install the development version of `mrsim` from
+[GitHub](https://github.com/) with
 
 ``` r
 # install.packages("devtools")
@@ -29,14 +29,16 @@ data and estimate the causal effect of the exposure (X) on the outcome
 # install.packages("MendelianRandomization")
 library(mrsim)
 
+set.seed(42)
+
 hyper_parameters <- define_hyper_parameters(
     m = 500,
     k = 500,
-    p = 0.25,
+    p = 25 / 100,
     r2_g_x = 0.01 / 100,
-    r2_u_x = 0.3,
+    r2_u_x = 30 / 100,
     r2_g_y = 0.002 / 100,
-    r2_u_y = 0.3
+    r2_u_y = 30 / 100
 )
 
 restrictions <- define_restrictions()
@@ -66,7 +68,7 @@ model_fit <- MendelianRandomization::mr_ivw(mr_data)
 estimated_beta_x_y <- model_fit$Estimate
 
 print(estimated_beta_x_y)
-#> [1] 0.2862771
+#> [1] 0.1227712
 
 real_beta_x_y <- get_beta_x_y(parameters)
 
@@ -80,14 +82,16 @@ Alternatively, you can simulate just one sample
 # install.packages("MendelianRandomization")
 library(mrsim)
 
+set.seed(42)
+
 hyper_parameters <- define_hyper_parameters(
     m = 500,
     k = 500,
-    p = 0.25,
+    p = 25 / 100,
     r2_g_x = 0.01 / 100,
-    r2_u_x = 0.3,
+    r2_u_x = 30 / 100,
     r2_g_y = 0.002 / 100,
-    r2_u_y = 0.3
+    r2_u_y = 30 / 100
 )
 
 restrictions <- define_restrictions()
@@ -115,7 +119,7 @@ model_fit <- MendelianRandomization::mr_ivw(mr_data)
 estimated_beta_x_y <- model_fit$Estimate
 
 print(estimated_beta_x_y)
-#> [1] 0.5421832
+#> [1] 0.5310587
 
 real_beta_x_y <- get_beta_x_y(parameters)
 
