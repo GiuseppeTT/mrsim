@@ -1,4 +1,56 @@
 #' @export
+summarize_sample <- function(
+    sample
+) {
+    endogenous_variables <- sample$endogenous_variables
+    g <- endogenous_variables$g
+    x <- endogenous_variables$x
+    y <- endogenous_variables$y
+
+    n <- attr(sample, "n")
+
+    snp_count <- ncol(g)
+    beta_g_x <- numeric(snp_count)
+    beta_se_g_x <- numeric(snp_count)
+    p_value_g_x <- numeric(snp_count)
+    r2_g_x <- numeric(snp_count)
+    beta_g_y <- numeric(snp_count)
+    beta_se_g_y <- numeric(snp_count)
+    p_value_g_y <- numeric(snp_count)
+    r2_g_y <- numeric(snp_count)
+    for (i in seq_len(snp_count)) {
+        gi <- g[, i, drop = FALSE]
+
+        fit_g_x <- summary(lm(x ~ gi))
+        beta_g_x[i] <- fit_g_x$coefficients[2, "Estimate"]
+        beta_se_g_x[i] <- fit_g_x$coefficients[2, "Std. Error"]
+        p_value_g_x[i] <- fit_g_x$coefficients[2, "Pr(>|t|)"]
+        r2_g_x[i] <- fit_g_x$r.squared
+
+        fit_g_y <- summary(lm(y ~ gi))
+        beta_g_y[i] <- fit_g_y$coefficients[2, "Estimate"]
+        beta_se_g_y[i] <- fit_g_y$coefficients[2, "Std. Error"]
+        p_value_g_y[i] <- fit_g_y$coefficients[2, "Pr(>|t|)"]
+        r2_g_y[i] <- fit_g_y$r.squared
+    }
+
+    summary_statistics <- data.frame(
+        snp = seq_len(snp_count),
+        n = n,
+        beta_g_x = beta_g_x,
+        beta_se_g_x = beta_se_g_x,
+        p_value_g_x = p_value_g_x,
+        r2_g_x = r2_g_x,
+        beta_g_y = beta_g_y,
+        beta_se_g_y = beta_se_g_y,
+        p_value_g_y = p_value_g_y,
+        r2_g_y = r2_g_y
+    )
+
+    return(summary_statistics)
+}
+
+#' @export
 generate_sample <- function(
     parameters,
     n

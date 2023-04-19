@@ -1,4 +1,29 @@
 #' @export
+summarize_dataset <- function(
+    dataset
+) {
+    sample_1_statistics <- summarize_sample(dataset$sample_1)
+    sample_2_statistics <- summarize_sample(dataset$sample_2)
+    sample_3_statistics <- summarize_sample(dataset$sample_3)
+
+    colnames(sample_1_statistics) <- paste0("sample_1_", colnames(sample_1_statistics))
+    colnames(sample_2_statistics) <- paste0("sample_2_", colnames(sample_2_statistics))
+    colnames(sample_3_statistics) <- paste0("sample_3_", colnames(sample_3_statistics))
+
+    summary_statistics <- cbind(
+        sample_1_statistics,
+        sample_2_statistics,
+        sample_3_statistics
+    )
+
+    colnames(summary_statistics)[colnames(summary_statistics) == "sample_1_snp"] <- "snp"
+    summary_statistics <- summary_statistics[, ! (colnames(summary_statistics) %in% c("sample_2_snp", "sample_3_snp"))]
+
+    return(summary_statistics)
+}
+
+
+#' @export
 generate_dataset <- function(
     parameters,
     n_1,
