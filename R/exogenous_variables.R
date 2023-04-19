@@ -6,16 +6,16 @@ generate_exogenous_variables <- function(
     k <- parameters$k
     p <- parameters$p
 
-    gprime <- rbinom(n = n * (m + k), size = 2, prob = p)
+    gprime <- stats::rbinom(n = n * (m + k), size = 2, prob = p)
     gprime <- matrix(gprime, nrow = n, ncol = m + k, byrow = TRUE)
 
-    e_u <- rnorm(n = n, mean = 0, sd = 1)
+    e_u <- stats::rnorm(n = n, mean = 0, sd = 1)
     e_u <- matrix(e_u, nrow = n, ncol = 1, byrow = TRUE)
 
-    e_x <- rnorm(n = n, mean = 0, sd = 1)
+    e_x <- stats::rnorm(n = n, mean = 0, sd = 1)
     e_x <- matrix(e_x, nrow = n, ncol = 1, byrow = TRUE)
 
-    e_y <- rnorm(n = n, mean = 0, sd = 1)
+    e_y <- stats::rnorm(n = n, mean = 0, sd = 1)
     e_y <- matrix(e_y, nrow = n, ncol = 1, byrow = TRUE)
 
     exogenous_variables <- new_exogenous_variables(
