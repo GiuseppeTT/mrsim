@@ -115,3 +115,14 @@ print.dataset <- function(
     cat("\n", sep="")
     print(x$sample_3, level = level + 1)
 }
+
+#' @export
+get_beta_x_y.dataset <- function(
+    x,
+    ...
+) {
+    parameters <- attr(x, "parameters")
+    beta_x_y <- get_beta_x_y(parameters)
+
+    return(beta_x_y)
+}

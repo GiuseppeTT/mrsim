@@ -127,3 +127,14 @@ print.endogenous_variables <- function(
     cat("X data (x): ", format_matrix(x$x), "\n", sep = "")
     cat("Y data (y): ", format_matrix(x$y), "\n", sep = "")
 }
+
+#' @export
+get_beta_x_y.endogenous_variables <- function(
+    x,
+    ...
+) {
+    parameters <- attr(x, "parameters")
+    beta_x_y <- get_beta_x_y(parameters)
+
+    return(beta_x_y)
+}

@@ -135,3 +135,14 @@ print.sample <- function(
     cat("\n", sep="")
     print(x$endogenous_variables, level = level + 1)
 }
+
+#' @export
+get_beta_x_y.sample <- function(
+    x,
+    ...
+) {
+    parameters <- attr(x, "parameters")
+    beta_x_y <- get_beta_x_y(parameters)
+
+    return(beta_x_y)
+}

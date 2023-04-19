@@ -120,3 +120,14 @@ print.exogenous_variables <- function(
     cat("X noise (e_x): ", format_matrix(x$e_x), "\n", sep = "")
     cat("Y noise (e_y): ", format_matrix(x$e_y), "\n", sep = "")
 }
+
+#' @export
+get_beta_x_y.exogenous_variables <- function(
+    x,
+    ...
+) {
+    parameters <- attr(x, "parameters")
+    beta_x_y <- get_beta_x_y(parameters)
+
+    return(beta_x_y)
+}

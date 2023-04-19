@@ -1,4 +1,48 @@
 #' @export
+summarize_parameters <- function(
+    parameters
+) {
+    m <- parameters$m
+    k <- parameters$k
+    p <- parameters$p
+    alpha_u <- parameters$alpha_u
+    sigma2_u <- parameters$sigma2_u
+    alpha_x <- parameters$alpha_x
+    beta_g_x <- parameters$beta_g_x
+    beta_u_x <- parameters$beta_u_x
+    sigma2_x <- parameters$sigma2_x
+    alpha_y <- parameters$alpha_y
+    beta_x_y <- parameters$beta_x_y
+    beta_u_y <- parameters$beta_u_y
+    sigma2_y <- parameters$sigma2_y
+
+    hyper_parameters <- attr(parameters, "hyper_parameters")
+    hp_m <- hyper_parameters$m
+    hp_k <- hyper_parameters$k
+    hp_p <- hyper_parameters$p
+    r2_g_x <- hyper_parameters$r2_g_x
+    r2_u_x <- hyper_parameters$r2_u_x
+    r2_g_y <- hyper_parameters$r2_g_y
+    r2_u_y <- hyper_parameters$r2_u_y
+
+    snp_count <- m + k
+    real_beta_g_x <- beta_g_x
+    real_r2_g_x <- r2_g_x
+    real_beta_g_y <- beta_g_x * beta_x_y
+    real_r2_g_y <- r2_g_y
+
+    summary_statistics <- data.frame(
+        snp = seq_len(snp_count),
+        real_beta_g_x = real_beta_g_x,
+        real_r2_g_x = real_r2_g_x,
+        real_beta_g_y = real_beta_g_y,
+        real_r2_g_y = real_r2_g_y
+    )
+
+    return(summary_statistics)
+}
+
+#' @export
 calculate_parameters <- function(
     hyper_parameters,
     restrictions
@@ -362,4 +406,14 @@ print.parameters <- function(
     cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, " (targeted causal effect)", "\n", sep = "")
     cat("Causal effect of U on Y (beta_u_y): ", x$beta_u_y, "\n", sep = "")
     cat("Y noise variance (sigma2_y): ", x$sigma2_y, sep = "")
+}
+
+#' @export
+get_beta_x_y.parameters <- function(
+    x,
+    ...
+) {
+    beta_x_y <- x$beta_x_y
+
+    return(beta_x_y)
 }
