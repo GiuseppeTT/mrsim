@@ -21,9 +21,9 @@ devtools::install_github("GiuseppeTT/mrsim")
 
 ## Example
 
-This is a basic example which shows you how to simulate three-sample MR
-data and estimate the causal effect of the exposure (X) on the outcome
-(Y) using the `MendelianRandomization` package.
+This is a basic example which shows you how to use `mrsim` to simulate
+MR data and estimate the causal effect of the exposure (X) on the
+outcome (Y) with the `MendelianRandomization` package.
 
 ``` r
 # install.packages("MendelianRandomization")
@@ -45,65 +45,9 @@ restrictions <- define_restrictions()
 
 parameters <- calculate_parameters(hyper_parameters, restrictions)
 
-dataset <- generate_dataset(
-    parameters,
-    n_1 = 10e3,
-    n_2 = 10e3,
-    n_3 = 10e3
-)
+sample <- generate_sample(parameters,n = 10e3)
 
-summary_statistics <- summarize_dataset(dataset)
-
-filtered_summary_statistics <- summary_statistics[summary_statistics$sample_1_f_statistic_g_x > 10, ]
-
-mr_data <- MendelianRandomization::mr_input(
-    bx = filtered_summary_statistics$sample_2_beta_g_x,
-    bxse = filtered_summary_statistics$sample_2_beta_se_g_x,
-    by = filtered_summary_statistics$sample_3_beta_g_y,
-    byse = filtered_summary_statistics$sample_3_beta_se_g_y
-)
-
-model_fit <- MendelianRandomization::mr_ivw(mr_data)
-
-estimated_beta_x_y <- model_fit$Estimate
-
-print(estimated_beta_x_y)
-#> [1] 0.1227712
-
-real_beta_x_y <- get_beta_x_y(parameters)
-
-print(real_beta_x_y)
-#> [1] 0.4472136
-```
-
-Alternatively, you can simulate just one sample
-
-``` r
-# install.packages("MendelianRandomization")
-library(mrsim)
-
-set.seed(42)
-
-hyper_parameters <- define_hyper_parameters(
-    m = 500,
-    k = 500,
-    p = 25 / 100,
-    r2_g_x = 0.01 / 100,
-    r2_u_x = 30 / 100,
-    r2_g_y = 0.002 / 100,
-    r2_u_y = 30 / 100
-)
-
-restrictions <- define_restrictions()
-
-parameters <- calculate_parameters(hyper_parameters, restrictions)
-
-sample <- generate_sample(
-    parameters,
-    n = 10e3
-)
-
-summary_statistics <- summarize_sample(sample)
+summary_statistics <- calculate_summary_statistics(sample)
 
 filtered_summary_statistics <- summary_statistics[summary_statistics$f_statistic_g_x > 10, ]
 
@@ -116,7 +60,7 @@ mr_data <- MendelianRandomization::mr_input(
 
 model_fit <- MendelianRandomization::mr_ivw(mr_data)
 
-estimated_beta_x_y <- model_fit$Estimate
+estimated_beta_x_y <- model_fit@Estimate
 
 print(estimated_beta_x_y)
 #> [1] 0.5310587
