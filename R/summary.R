@@ -10,47 +10,23 @@ calculate_summary_statistics <- function(
     n <- attr(sample, "n")
 
     snp_count <- ncol(g)
-    beta_g_x <- numeric(snp_count)
-    beta_se_g_x <- numeric(snp_count)
-    p_value_g_x <- numeric(snp_count)
-    f_statistic_g_x <- numeric(snp_count)
-    r2_g_x <- numeric(snp_count)
-    beta_g_y <- numeric(snp_count)
-    beta_se_g_y <- numeric(snp_count)
-    p_value_g_y <- numeric(snp_count)
-    f_statistic_g_y <- numeric(snp_count)
-    r2_g_y <- numeric(snp_count)
-    for (i in seq_len(snp_count)) {
-        gi <- g[, i, drop = FALSE]
 
-        fit_g_x <- summary(stats::lm(x ~ gi))
-        beta_g_x[i] <- fit_g_x$coefficients[2, "Estimate"]
-        beta_se_g_x[i] <- fit_g_x$coefficients[2, "Std. Error"]
-        p_value_g_x[i] <- fit_g_x$coefficients[2, "Pr(>|t|)"]
-        f_statistic_g_x[i] <- fit_g_x$fstatistic["value"]
-        r2_g_x[i] <- fit_g_x$r.squared
-
-        fit_g_y <- summary(stats::lm(y ~ gi))
-        beta_g_y[i] <- fit_g_y$coefficients[2, "Estimate"]
-        beta_se_g_y[i] <- fit_g_y$coefficients[2, "Std. Error"]
-        p_value_g_y[i] <- fit_g_y$coefficients[2, "Pr(>|t|)"]
-        f_statistic_g_y[i] <- fit_g_y$fstatistic["value"]
-        r2_g_y[i] <- fit_g_y$r.squared
-    }
+    fit_g_x <- fit_multiple_simple_lm(g, x)
+    fit_g_y <- fit_multiple_simple_lm(g, y)
 
     summary_statistics <- data.frame(
         snp = seq_len(snp_count),
         n = n,
-        beta_g_x = beta_g_x,
-        beta_se_g_x = beta_se_g_x,
-        p_value_g_x = p_value_g_x,
-        f_statistic_g_x = f_statistic_g_x,
-        r2_g_x = r2_g_x,
-        beta_g_y = beta_g_y,
-        beta_se_g_y = beta_se_g_y,
-        p_value_g_y = p_value_g_y,
-        f_statistic_g_y = f_statistic_g_y,
-        r2_g_y = r2_g_y
+        beta_g_x = fit_g_x$betas,
+        beta_se_g_x = fit_g_x$beta_ses,
+        p_value_g_x = fit_g_x$p_values,
+        f_statistic_g_x = fit_g_x$f_statistics,
+        r2_g_x = fit_g_x$r2s,
+        beta_g_y = fit_g_y$betas,
+        beta_se_g_y = fit_g_y$beta_ses,
+        p_value_g_y = fit_g_y$p_values,
+        f_statistic_g_y = fit_g_y$f_statistics,
+        r2_g_y = fit_g_y$r2s
     )
 
     return(summary_statistics)
