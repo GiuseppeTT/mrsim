@@ -90,14 +90,24 @@ validate_hyper_parameters <- function(
         stop("Hyper parameter `r2_u_x` should be in the [0, 1] interval")
     }
 
+    total_r2_x <- m * r2_g_x + r2_u_x
+    if (! is_in_zero_one(total_r2_x)) {
+        stop("Hyper parameters `m`, `r2_g_x` and `r2_u_x` are not consistent. `total_r2_x = m * r2_g_x + r2_u_x` should be in the [0, 1] interval")
+    }
+
+    if (! is_in_zero_one(r2_u_y)) {
+        stop("Hyper parameter `r2_u_y` should be in the [0, 1] interval")
+    }
+
     # Otherwise the G's would explain more than 100% of the variance of Y
     # Derived using r2_g_y = beta_x_y^2 * r2_g_x
     if (! is_in_bound(beta_x_y, -1, 1)) {
         stop("Hyper parameter `beta_x_y` should be in the [- 1 / sqrt(r2_g_x), 1 / sqrt(r2_g_x)] interval")
     }
 
-    if (! is_in_zero_one(r2_u_y)) {
-        stop("Hyper parameter `r2_u_y` should be in the [0, 1] interval")
+    total_r2_y <- beta_x_y^2 * m * r2_g_x + r2_u_y
+    if (! is_in_zero_one(total_r2_y)) {
+        stop("Hyper parameters `m`, `r2_g_x`, `r2_u_y` and `beta_x_y` are not consistent. `total_r2_y = beta_x_y^2 * m * r2_g_x + r2_u_y` should be in the [0, 1] interval")
     }
 }
 
