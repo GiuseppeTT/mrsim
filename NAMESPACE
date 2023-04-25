@@ -2,6 +2,7 @@
 
 S3method(get_beta_x_y,endogenous_variables)
 S3method(get_beta_x_y,exogenous_variables)
+S3method(get_beta_x_y,hyper_parameters)
 S3method(get_beta_x_y,parameters)
 S3method(get_beta_x_y,sample)
 S3method(print,endogenous_variables)

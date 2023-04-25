@@ -1,3 +1,14 @@
+#' Calculate parameters
+#'
+#' Calculate parameters for simulating mendelian randomization (MR) data from the given hyper parameters and restrictions.
+#'
+#' Additional constraints may be posed to the parameters values in order to garantee that the simulated data is valid.
+#'
+#' @param hyper_parameters An object of class `hyper_parameters`
+#' @param restrictions An object of class `restrictions`
+#'
+#' @return An object of class `parameters`
+#'
 #' @export
 calculate_parameters <- function(
     hyper_parameters,
@@ -49,6 +60,28 @@ calculate_parameters <- function(
     return(parameters)
 }
 
+#' Define parameters
+#'
+#' Define parameters for simulating mendelian randomization (MR) data.
+#'
+#' Additional constraints may be posed to the parameter values in order to garantee that the simulated data is valid.
+#'
+#' @param m Number of non-zero effect G's. It should be a positive integer
+#' @param k Number of zero effect G's. It should be a positive integer
+#' @param p Minor allele frequency. It should be between `0` and `0.5`
+#' @param alpha_u Intercept of U. It should be a number
+#' @param sigma2_u Variance of U noise. It should be a positive number
+#' @param alpha_x Intercept of X. It should be a number
+#' @param beta_g_x Causal effect of G's on X. It should be a number
+#' @param beta_u_x Causal effect of U on X. It should be a number
+#' @param sigma2_x Variance of X noise. It should be a positive number
+#' @param alpha_y Intercept of Y. It should be a number
+#' @param beta_u_y Causal effect of U on Y. It should be a number
+#' @param beta_x_y (Targeted causal effect) Causal effect of X on Y. It should be a number
+#' @param sigma2_y Variance of Y noise. It should be a positive number
+#'
+#' @return An object of class `parameters`
+#'
 #' @export
 define_parameters <- function(
     m,
@@ -318,6 +351,14 @@ validate_parameters_restrictions <- function(
     }
 }
 
+#' Test if the object is `paremeters`
+#'
+#' Returns TRUE for `paremeters` or subclasses thereof and FALSE for all other objects.
+#'
+#' @param x An object
+#'
+#' @return A logical value
+#'
 #' @export
 is_parameters <- function(
     x
@@ -338,8 +379,8 @@ print.parameters <- function(
 
     cat(header, " Parameters", "\n", sep = "")
     cat("\n", sep = "")
-    cat("Number of causal G's (m): ", x$m, "\n", sep = "")
-    cat("Number of null G's (k): ", x$k, "\n", sep = "")
+    cat("Number of non-zero effect G's (m): ", x$m, "\n", sep = "")
+    cat("Number of zero effect G's (k): ", x$k, "\n", sep = "")
     cat("Minor allele frequency of G's (p): ", x$p, "\n", sep = "")
     cat("U intercept (alpha_u): ", x$alpha_u, "\n", sep = "")
     cat("U noise variance (sigma2_u): ", x$sigma2_u, "\n", sep = "")

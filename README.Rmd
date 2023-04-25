@@ -49,15 +49,27 @@ hyper_parameters <- define_hyper_parameters(
     beta_x_y = 20 / 100
 )
 
+print(hyper_parameters)
+
 restrictions <- define_restrictions()
+
+print(restrictions)
 
 parameters <- calculate_parameters(hyper_parameters, restrictions)
 
+print(parameters)
+
 sample <- generate_sample(parameters,n = 10e3)
+
+print(sample)
 
 summary_statistics <- calculate_summary_statistics(sample)
 
+print(head(summary_statistics))
+
 filtered_summary_statistics <- summary_statistics[summary_statistics$f_statistic_g_x > 10, ]
+
+print(head(filtered_summary_statistics))
 
 mr_data <- MendelianRandomization::mr_input(
     bx = filtered_summary_statistics$beta_g_x,

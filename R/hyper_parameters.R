@@ -1,3 +1,19 @@
+#' Define hyper parameters
+#'
+#' Define hyper parameters for simulating mendelian randomization (MR) data.
+#'
+#' Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.
+#'
+#' @param m Number of non-zero effect G's. It should be a positive integer
+#' @param k Number of zero effect G's. It should be a positive integer
+#' @param p Minor allele frequency. It should be between `0` and `0.5`
+#' @param r2_g_x Variance in X explained per G. It should be between `0` and `1 / m`
+#' @param r2_u_x Variance in X explained by U. It should be between `0` and `1`
+#' @param r2_u_y Variance in Y explained by U. It should be between `0` and `1`
+#' @param beta_x_y (Targeted causal effect) Causal effect of X on Y. It should be between `- 1 / sqrt(r2_g_x)` and `1 / sqrt(r2_g_x)`. Since all variables are standardized, a more reasonable range is between `-1` and `1`
+#'
+#' @return An object of class `hyper_parameters`
+#'
 #' @export
 define_hyper_parameters <- function(
     m,
@@ -111,6 +127,14 @@ validate_hyper_parameters <- function(
     }
 }
 
+#' Test if the object is `hyper_parameters`
+#'
+#' Returns TRUE for `hyper_parameters` or subclasses thereof and FALSE for all other objects.
+#'
+#' @param x An object
+#'
+#' @return A logical value
+#'
 #' @export
 is_hyper_parameters <- function(
     x
@@ -131,11 +155,21 @@ print.hyper_parameters <- function(
 
     cat(header, " Hyper parameters", "\n", sep = "")
     cat("\n", sep = "")
-    cat("Number of causal G's (m): ", x$m, "\n", sep = "")
-    cat("Number of null G's (k): ", x$k, "\n", sep = "")
+    cat("Number of non-zero effect G's (m): ", x$m, "\n", sep = "")
+    cat("Number of zero effect G's (k): ", x$k, "\n", sep = "")
     cat("Minor allele frequency of G's (p): ", x$p, "\n", sep = "")
     cat("Variance in X explained per G (r2_g_x): ", x$r2_g_x, "\n", sep = "")
     cat("Variance in X explained by U (r2_u_x): ", x$r2_u_x, "\n", sep = "")
-    cat("Variance in Y explained by U (r2_u_y): ", x$r2_u_y, sep = "")
-    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, "\n", sep = "")
+    cat("Variance in Y explained by U (r2_u_y): ", x$r2_u_y, "\n", sep = "")
+    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, " (targeted causal effect)", "\n", sep = "")
+}
+
+#' @export
+get_beta_x_y.hyper_parameters <- function(
+    x,
+    ...
+) {
+    beta_x_y <- x$beta_x_y
+
+    return(beta_x_y)
 }
