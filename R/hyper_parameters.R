@@ -1,3 +1,18 @@
+#' Define hyper parameters
+#'
+#' Define hyper parameters for simulating mendelian randomization (MR) data.
+#'
+#' Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.
+#'
+#' @param m Number of non-zero effect SNPs. It should be a positive integer
+#' @param k Number of zero effect SNPs. It should be a positive integer
+#' @param p Minor allele frequency. It should be between `0` and `0.5`
+#' @param r2_g_x Variance in X explained per G. It should be between `0` and `1 / m`
+#' @param r2_u_x Variance in X explained by U. It should be between `0` and `1`
+#' @param r2_u_y Variance in Y explained by U. It should be between `0` and `1`
+#' @param beta_x_y Causal effect of X on Y. It should be between `- 1 / sqrt(r2_g_x)` and `1 / sqrt(r2_g_x)`. Since all variables are standardized, a more reasonable range is between `-1` and `1`
+#'
+#' @return An object of class "hyper_parameters"
 #' @export
 define_hyper_parameters <- function(
     m,
@@ -111,6 +126,13 @@ validate_hyper_parameters <- function(
     }
 }
 
+#' Test if the object is `hyper_parameters`
+#'
+#' This function returns TRUE for `hyper_parameters` or subclasses thereof and FALSE for all other objects.
+#'
+#' @param x An object
+#'
+#' @return TRUE if the object inherits from the `hyper_parameters` class, else FALSE
 #' @export
 is_hyper_parameters <- function(
     x
@@ -120,6 +142,14 @@ is_hyper_parameters <- function(
     return(result)
 }
 
+
+#' Print an object as `hyper_parameters`
+#'
+#' This function prints an object as if its class is `hyper_parameters`. It is intended to be used only for `hyper_parameters` or subclasses thereof.
+#'
+#' @param x An object
+#' @param ... Extra arguments. Currently not being used.
+#'
 #' @export
 print.hyper_parameters <- function(
     x,
