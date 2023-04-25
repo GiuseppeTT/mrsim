@@ -51,10 +51,10 @@ fit_reference <- function(
 
 set.seed(123)
 
-alpha <- 2
-betas <- as.matrix(rep(2, 10), nrow = 10, ncol = 1)
+alpha <- 1
+betas <- as.matrix(rep(1, 10), nrow = 10, ncol = 1)
 
-e <- matrix(2 * 10 * rnorm(100), nrow = 100, ncol = 1)
+e <- matrix(10 * rnorm(100), nrow = 100, ncol = 1)
 x <- matrix(rnorm(100 * 10), nrow = 100, ncol = 10)
 y <- alpha + x %*% betas + e
 

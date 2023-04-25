@@ -37,8 +37,8 @@ hyper_parameters <- define_hyper_parameters(
     p = 25 / 100,
     r2_g_x = 0.01 / 100,
     r2_u_x = 30 / 100,
-    r2_g_y = 0.002 / 100,
-    r2_u_y = 30 / 100
+    r2_u_y = 30 / 100,
+    beta_x_y = 20 / 100
 )
 
 restrictions <- define_restrictions()
@@ -63,10 +63,10 @@ model_fit <- MendelianRandomization::mr_ivw(mr_data)
 estimated_beta_x_y <- model_fit@Estimate
 
 print(estimated_beta_x_y)
-#> [1] 0.5310587
+#> [1] 0.316981
 
 real_beta_x_y <- get_beta_x_y(parameters)
 
 print(real_beta_x_y)
-#> [1] 0.4472136
+#> [1] 0.2
 ```

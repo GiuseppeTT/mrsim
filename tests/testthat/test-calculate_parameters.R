@@ -4,8 +4,8 @@ hyper_parameters <- define_hyper_parameters(
     p = 25 / 100,
     r2_g_x = 0.01 / 100,
     r2_u_x = 30 / 100,
-    r2_g_y = 0.002 / 100,
-    r2_u_y = 30 / 100
+    r2_u_y = 30 / 100,
+    beta_x_y = 20 / 100
 )
 
 restrictions <- define_restrictions()
@@ -24,7 +24,7 @@ test_that("calculate_parameters works", {
     expect_equal(parameters$beta_u_x, 0.547722557505)
     expect_equal(parameters$sigma2_x, 0.65)
     expect_equal(parameters$alpha_y, 0)
-    expect_equal(parameters$beta_x_y, 0.4472136)
-    expect_equal(parameters$beta_u_y, 0.302773583227)
-    expect_equal(parameters$sigma2_y, 0.56)
+    expect_equal(parameters$beta_u_y, 0.438178046004)
+    expect_equal(parameters$beta_x_y, 20 / 100)
+    expect_equal(parameters$sigma2_y, 0.672)
 })

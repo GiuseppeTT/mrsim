@@ -9,8 +9,8 @@ parameters <- define_parameters(
     beta_u_x = 0.55,
     sigma2_x = 0.65,
     alpha_y = 0,
-    beta_x_y = 0.45,
     beta_u_y = 0.30,
+    beta_x_y = 0.45,
     sigma2_y = 0.56
 )
 
@@ -26,7 +26,7 @@ test_that("define_parameters works", {
     expect_equal(parameters$beta_u_x, 0.55)
     expect_equal(parameters$sigma2_x, 0.65)
     expect_equal(parameters$alpha_y, 0)
-    expect_equal(parameters$beta_x_y, 0.45)
     expect_equal(parameters$beta_u_y, 0.30)
+    expect_equal(parameters$beta_x_y, 0.45)
     expect_equal(parameters$sigma2_y, 0.56)
 })

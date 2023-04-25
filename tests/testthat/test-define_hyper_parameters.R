@@ -4,8 +4,8 @@ hyper_parameters <- define_hyper_parameters(
     p = 25 / 100,
     r2_g_x = 0.01 / 100,
     r2_u_x = 30 / 100,
-    r2_g_y = 0.002 / 100,
-    r2_u_y = 30 / 100
+    r2_u_y = 30 / 100,
+    beta_x_y = 20 / 100
 )
 
 test_that("define_hyper_parameters works", {
@@ -15,6 +15,6 @@ test_that("define_hyper_parameters works", {
     expect_equal(hyper_parameters$p, 25 / 100)
     expect_equal(hyper_parameters$r2_g_x, 0.01 / 100)
     expect_equal(hyper_parameters$r2_u_x, 30 / 100)
-    expect_equal(hyper_parameters$r2_g_y, 0.002 / 100)
     expect_equal(hyper_parameters$r2_u_y, 30 / 100)
+    expect_equal(hyper_parameters$beta_x_y, 20 / 100)
 })

@@ -8,11 +8,10 @@ calculate_parameters <- function(
     p <- hyper_parameters$p
     r2_g_x <- hyper_parameters$r2_g_x
     r2_u_x <- hyper_parameters$r2_u_x
-    r2_g_y <- hyper_parameters$r2_g_y
     r2_u_y <- hyper_parameters$r2_u_y
+    beta_x_y <- hyper_parameters$beta_x_y
 
     total_r2_g_x <- m * r2_g_x
-    total_r2_g_y <- m * r2_g_y
 
     alpha_u <- 0
     sigma2_u <- 1
@@ -24,7 +23,6 @@ calculate_parameters <- function(
     sigma2_x <- 1 - beta_u_x^2 - sum(beta_g_x^2)
 
     alpha_y <- 0
-    beta_x_y <- sqrt(total_r2_g_y / sum(beta_g_x^2))
     beta_u_y <- sqrt(r2_u_y) - beta_x_y * beta_u_x
     sigma2_y <- 1 - (beta_u_y + beta_x_y * beta_u_x)^2 - beta_x_y^2 * sum(beta_g_x^2) - beta_x_y^2 * sigma2_x
 
@@ -39,8 +37,8 @@ calculate_parameters <- function(
         beta_u_x = beta_u_x,
         sigma2_x = sigma2_x,
         alpha_y  = alpha_y ,
-        beta_x_y = beta_x_y,
         beta_u_y = beta_u_y,
+        beta_x_y = beta_x_y,
         sigma2_y = sigma2_y,
         hyper_parameters = hyper_parameters,
         restrictions = restrictions
@@ -63,8 +61,8 @@ define_parameters <- function(
     beta_u_x,
     sigma2_x,
     alpha_y,
-    beta_x_y,
     beta_u_y,
+    beta_x_y,
     sigma2_y
 ) {
     parameters <- new_parameters(
@@ -78,8 +76,8 @@ define_parameters <- function(
         beta_u_x = beta_u_x,
         sigma2_x = sigma2_x,
         alpha_y  = alpha_y ,
-        beta_x_y = beta_x_y,
         beta_u_y = beta_u_y,
+        beta_x_y = beta_x_y,
         sigma2_y = sigma2_y,
         hyper_parameters = NULL,
         restrictions = NULL
@@ -101,8 +99,8 @@ new_parameters <- function(
     beta_u_x,
     sigma2_x,
     alpha_y,
-    beta_x_y,
     beta_u_y,
+    beta_x_y,
     sigma2_y,
     hyper_parameters,
     restrictions
@@ -117,8 +115,8 @@ new_parameters <- function(
     stopifnot(is.numeric(beta_u_x))
     stopifnot(is.numeric(sigma2_x))
     stopifnot(is.numeric(alpha_y))
-    stopifnot(is.numeric(beta_x_y))
     stopifnot(is.numeric(beta_u_y))
+    stopifnot(is.numeric(beta_x_y))
     stopifnot(is.numeric(sigma2_y))
     stopifnot(is.null(hyper_parameters) || is_hyper_parameters(hyper_parameters))
     stopifnot(is.null(restrictions) || is_restrictions(restrictions))
@@ -134,8 +132,8 @@ new_parameters <- function(
         beta_u_x = beta_u_x,
         sigma2_x = sigma2_x,
         alpha_y  = alpha_y ,
-        beta_x_y = beta_x_y,
         beta_u_y = beta_u_y,
+        beta_x_y = beta_x_y,
         sigma2_y = sigma2_y
     )
 
@@ -155,24 +153,15 @@ validate_parameters <- function(
     hyper_parameters <- attr(parameters, "hyper_parameters")
     restrictions <- attr(parameters, "restrictions")
 
-    validate_parameters_parameters(
-        parameters
-    )
+    validate_parameters_parameters(parameters)
 
     if (xor(is.null(hyper_parameters), is.null(restrictions))) {
         stop("Either both hyper parameters and restrictions should be defined or none of them should")
     }
 
     if (! is.null(hyper_parameters) && ! is.null(restrictions)) {
-        validate_parameters_hyper_parameters(
-            parameters,
-            hyper_parameters
-        )
-
-        validate_parameters_restrictions(
-            parameters,
-            restrictions
-        )
+        validate_parameters_hyper_parameters(parameters, hyper_parameters)
+        validate_parameters_restrictions(parameters, restrictions)
     }
 }
 
@@ -189,8 +178,8 @@ validate_parameters_parameters <- function(
     beta_u_x <- parameters$beta_u_x
     sigma2_x <- parameters$sigma2_x
     alpha_y <- parameters$alpha_y
-    beta_x_y <- parameters$beta_x_y
     beta_u_y <- parameters$beta_u_y
+    beta_x_y <- parameters$beta_x_y
     sigma2_y <- parameters$sigma2_y
 
     if (! (is_positive(m) && is_discrete(m))) {
@@ -205,12 +194,12 @@ validate_parameters_parameters <- function(
         stop("Parameter `p` should be in the [0, 0.5] interval")
     }
 
-    if (! is_lengthed_as(beta_g_x, m + k)) {
-        stop("Parameter `beta_g_x` should have length `m + k`")
-    }
-
     if (! is_positive(sigma2_u)) {
         stop("Parameter `sigma2_u` should be positive")
+    }
+
+    if (! is_lengthed_as(beta_g_x, m + k)) {
+        stop("Parameter `beta_g_x` should have length `m + k`")
     }
 
     if (! is_positive(sigma2_x)) {
@@ -236,8 +225,8 @@ validate_parameters_hyper_parameters <- function(
     beta_u_x <- parameters$beta_u_x
     sigma2_x <- parameters$sigma2_x
     alpha_y <- parameters$alpha_y
-    beta_x_y <- parameters$beta_x_y
     beta_u_y <- parameters$beta_u_y
+    beta_x_y <- parameters$beta_x_y
     sigma2_y <- parameters$sigma2_y
 
     hp_m <- hyper_parameters$m
@@ -245,8 +234,8 @@ validate_parameters_hyper_parameters <- function(
     hp_p <- hyper_parameters$p
     r2_g_x <- hyper_parameters$r2_g_x
     r2_u_x <- hyper_parameters$r2_u_x
-    r2_g_y <- hyper_parameters$r2_g_y
     r2_u_y <- hyper_parameters$r2_u_y
+    hp_beta_x_y <- hyper_parameters$beta_x_y
 
     if (m != hp_m) {
         stop("Parameter `m` should be equal to hyper parameter `m`")
@@ -275,8 +264,8 @@ validate_parameters_restrictions <- function(
     beta_u_x <- parameters$beta_u_x
     sigma2_x <- parameters$sigma2_x
     alpha_y <- parameters$alpha_y
-    beta_x_y <- parameters$beta_x_y
     beta_u_y <- parameters$beta_u_y
+    beta_x_y <- parameters$beta_x_y
     sigma2_y <- parameters$sigma2_y
 
     mean_g <- restrictions$mean_g
@@ -359,8 +348,8 @@ print.parameters <- function(
     cat("Causal effect of U on X (beta_u_x): ", x$beta_u_x, "\n", sep = "")
     cat("X noise variance (sigma2_x): ", x$sigma2_x, "\n", sep = "")
     cat("Y intercept (alpha_y): ", x$alpha_y, "\n", sep = "")
-    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, " (targeted causal effect)", "\n", sep = "")
     cat("Causal effect of U on Y (beta_u_y): ", x$beta_u_y, "\n", sep = "")
+    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, " (targeted causal effect)", "\n", sep = "")
     cat("Y noise variance (sigma2_y): ", x$sigma2_y, sep = "")
 }
 
