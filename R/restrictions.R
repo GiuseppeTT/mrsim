@@ -1,3 +1,11 @@
+#' Define restrictions
+#'
+#' Define restrictions for simulating mendelian randomization (MR) data.
+#'
+#' Additional constraints may be posed to the restrictions values in order to garantee that the simulated data is valid.
+#'
+#' @return An object of class `restrictions`
+#'
 #' @export
 define_restrictions <- function(
 ) {
@@ -84,6 +92,14 @@ validate_restrictions <- function(
     }
 }
 
+#' Test if an object is of class `restrictions`
+#'
+#' Returns TRUE for `restrictions` or subclasses thereof and FALSE for all other objects.
+#'
+#' @param x An object
+#'
+#' @return A logical value
+#'
 #' @export
 is_restrictions <- function(
     x

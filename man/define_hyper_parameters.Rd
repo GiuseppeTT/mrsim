@@ -19,10 +19,10 @@ define_hyper_parameters(m, k, p, r2_g_x, r2_u_x, r2_u_y, beta_x_y)
 
 \item{r2_u_y}{Variance in Y explained by U. It should be between \code{0} and \code{1}}
 
-\item{beta_x_y}{Causal effect of X on Y. It should be between \code{- 1 / sqrt(r2_g_x)} and \code{1 / sqrt(r2_g_x)}. Since all variables are standardized, a more reasonable range is between \code{-1} and \code{1}}
+\item{beta_x_y}{(Targeted causal effect) Causal effect of X on Y. It should be between \code{- 1 / sqrt(r2_g_x)} and \code{1 / sqrt(r2_g_x)}. Since all variables are standardized, a more reasonable range is between \code{-1} and \code{1}}
 }
 \value{
-An object of class "hyper_parameters"
+An object of class \code{hyper_parameters}
 }
 \description{
 Define hyper parameters for simulating mendelian randomization (MR) data.

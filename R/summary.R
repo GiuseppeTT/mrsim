@@ -1,3 +1,23 @@
+#' Calculate summary statistics
+#'
+#' Calculate summary statistics for a sample of mendelian randomization (MR) data.
+#'
+#' The summary statistics are calculated for each SNP in the sample and include the following:
+#' - `beta_g_x`: The beta coefficient of the simple linear regression of between the SNP `g` and the exposure `x`
+#' - `beta_se_g_x`: The standard error of `beta_g_x`
+#' - `p_value_g_x`: The p-value of `beta_g_x`
+#' - `f_statistic_g_x`: The F-statistic of `beta_g_x`
+#' - `r2_g_x`: The R-squared of the simple linear regression of between the SNP `g` and the exposure `x`
+#' - `beta_g_y`: The beta coefficient of the simple linear regression of between the SNP `g` and the outcome `y`
+#' - `beta_se_g_y`: The standard error of `beta_g_y`
+#' - `p_value_g_y`: The p-value of `beta_g_y`
+#' - `f_statistic_g_y`: The F-statistic of `beta_g_y`
+#' - `r2_g_y`: The R-squared of the simple linear regression of between the SNP `g` and the outcome `y`
+#'
+#' @param sample An object of class `sample`
+#'
+#' @return A data frame of `m + k` rows and `12` columns
+#'
 #' @export
 calculate_summary_statistics <- function(
     sample

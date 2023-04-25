@@ -10,8 +10,8 @@ is_hyper_parameters(x)
 \item{x}{An object}
 }
 \value{
-TRUE if the object inherits from the \code{hyper_parameters} class, else FALSE
+A logical value
 }
 \description{
-This function returns TRUE for \code{hyper_parameters} or subclasses thereof and FALSE for all other objects.
+Returns TRUE for \code{hyper_parameters} or subclasses thereof and FALSE for all other objects.
 }

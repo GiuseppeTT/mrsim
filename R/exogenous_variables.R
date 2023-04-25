@@ -95,6 +95,14 @@ validate_exogenous_variables <- function(
     }
 }
 
+#' Test if the object is `exogenous_variables`
+#'
+#' Returns TRUE for `exogenous_variables` or subclasses thereof and FALSE for all other objects.
+#'
+#' @param x An object
+#'
+#' @return A logical value
+#'
 #' @export
 is_exogenous_variables <- function(
     x

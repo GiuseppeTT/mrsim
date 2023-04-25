@@ -1,3 +1,11 @@
+#' Generate sample
+#'
+#' Generate a sample of size `n` from the model defined by `parameters`.
+#'
+#' @param parameters An object of class `parameters`
+#' @param n Sample size. It should be a positive integer
+#'
+#' @return An object of class `sample`
 #' @export
 generate_sample <- function(
     parameters,
@@ -49,6 +57,14 @@ validate_sample <- function(
 ) {
 }
 
+#' Test if the object is `sample`
+#'
+#' Returns TRUE for `sample` or subclasses thereof and FALSE for all other objects.
+#'
+#' @param x An object
+#'
+#' @return A logical value
+#'
 #' @export
 is_sample <- function(
     x
