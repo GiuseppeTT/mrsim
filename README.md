@@ -44,8 +44,8 @@ hyper_parameters <- define_hyper_parameters(
 print(hyper_parameters)
 #> # Hyper parameters
 #> 
-#> Number of causal G's (m): 500
-#> Number of null G's (k): 500
+#> Number of non-zero effect G's (m): 500
+#> Number of zero effect G's (k): 500
 #> Minor allele frequency of G's (p): 0.25
 #> Variance in X explained per G (r2_g_x): 1e-04
 #> Variance in X explained by U (r2_u_x): 0.3
@@ -71,8 +71,8 @@ parameters <- calculate_parameters(hyper_parameters, restrictions)
 print(parameters)
 #> # Parameters
 #> 
-#> Number of causal G's (m): 500
-#> Number of null G's (k): 500
+#> Number of non-zero effect G's (m): 500
+#> Number of zero effect G's (k): 500
 #> Minor allele frequency of G's (p): 0.25
 #> U intercept (alpha_u): 0
 #> U noise variance (sigma2_u): 1

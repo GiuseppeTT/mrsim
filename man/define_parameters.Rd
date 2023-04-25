@@ -21,9 +21,9 @@ define_parameters(
 )
 }
 \arguments{
-\item{m}{Number of non-zero effect SNPs. It should be a positive integer}
+\item{m}{Number of non-zero effect G's. It should be a positive integer}
 
-\item{k}{Number of zero effect SNPs. It should be a positive integer}
+\item{k}{Number of zero effect G's. It should be a positive integer}
 
 \item{p}{Minor allele frequency. It should be between \code{0} and \code{0.5}}
 

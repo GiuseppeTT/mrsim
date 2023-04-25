@@ -66,8 +66,8 @@ calculate_parameters <- function(
 #'
 #' Additional constraints may be posed to the parameter values in order to garantee that the simulated data is valid.
 #'
-#' @param m Number of non-zero effect SNPs. It should be a positive integer
-#' @param k Number of zero effect SNPs. It should be a positive integer
+#' @param m Number of non-zero effect G's. It should be a positive integer
+#' @param k Number of zero effect G's. It should be a positive integer
 #' @param p Minor allele frequency. It should be between `0` and `0.5`
 #' @param alpha_u Intercept of U. It should be a number
 #' @param sigma2_u Variance of U noise. It should be a positive number
@@ -379,8 +379,8 @@ print.parameters <- function(
 
     cat(header, " Parameters", "\n", sep = "")
     cat("\n", sep = "")
-    cat("Number of causal G's (m): ", x$m, "\n", sep = "")
-    cat("Number of null G's (k): ", x$k, "\n", sep = "")
+    cat("Number of non-zero effect G's (m): ", x$m, "\n", sep = "")
+    cat("Number of zero effect G's (k): ", x$k, "\n", sep = "")
     cat("Minor allele frequency of G's (p): ", x$p, "\n", sep = "")
     cat("U intercept (alpha_u): ", x$alpha_u, "\n", sep = "")
     cat("U noise variance (sigma2_u): ", x$sigma2_u, "\n", sep = "")

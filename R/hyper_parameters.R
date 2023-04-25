@@ -4,8 +4,8 @@
 #'
 #' Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.
 #'
-#' @param m Number of non-zero effect SNPs. It should be a positive integer
-#' @param k Number of zero effect SNPs. It should be a positive integer
+#' @param m Number of non-zero effect G's. It should be a positive integer
+#' @param k Number of zero effect G's. It should be a positive integer
 #' @param p Minor allele frequency. It should be between `0` and `0.5`
 #' @param r2_g_x Variance in X explained per G. It should be between `0` and `1 / m`
 #' @param r2_u_x Variance in X explained by U. It should be between `0` and `1`
@@ -155,8 +155,8 @@ print.hyper_parameters <- function(
 
     cat(header, " Hyper parameters", "\n", sep = "")
     cat("\n", sep = "")
-    cat("Number of causal G's (m): ", x$m, "\n", sep = "")
-    cat("Number of null G's (k): ", x$k, "\n", sep = "")
+    cat("Number of non-zero effect G's (m): ", x$m, "\n", sep = "")
+    cat("Number of zero effect G's (k): ", x$k, "\n", sep = "")
     cat("Minor allele frequency of G's (p): ", x$p, "\n", sep = "")
     cat("Variance in X explained per G (r2_g_x): ", x$r2_g_x, "\n", sep = "")
     cat("Variance in X explained by U (r2_u_x): ", x$r2_u_x, "\n", sep = "")

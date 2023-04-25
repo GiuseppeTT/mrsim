@@ -15,5 +15,5 @@ get_beta_x_y(x, ...)
 A numeric value
 }
 \description{
-Returns the causal effect of X on Y \code{beta_x_y}.
+Returns the real causal effect of X on Y \code{beta_x_y}.
 }
