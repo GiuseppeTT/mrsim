@@ -166,6 +166,6 @@ print.hyper_parameters <- function(
     cat("Minor allele frequency of G's (p): ", x$p, "\n", sep = "")
     cat("Variance in X explained per G (r2_g_x): ", x$r2_g_x, "\n", sep = "")
     cat("Variance in X explained by U (r2_u_x): ", x$r2_u_x, "\n", sep = "")
-    cat("Variance in Y explained by U (r2_u_y): ", x$r2_u_y, sep = "")
-    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, "\n", sep = "")
+    cat("Variance in Y explained by U (r2_u_y): ", x$r2_u_y, "\n", sep = "")
+    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, " (targeted causal effect)", "\n", sep = "")
 }
