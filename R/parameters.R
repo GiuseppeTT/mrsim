@@ -365,7 +365,7 @@ validate_parameters_restrictions <- function(
 is_parameters <- function(
     x
 ) {
-    result <- any(class(x) == "parameters")
+    result <- is_subclass_of(x, "parameters")
 
     return(result)
 }

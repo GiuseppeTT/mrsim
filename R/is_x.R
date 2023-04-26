@@ -1,3 +1,12 @@
+is_subclass_of <- function(
+    x,
+    class_name
+) {
+    result <- any(is_equal(class(x), class_name))
+
+    return(result)
+}
+
 is_discrete <- function(
     x
 ) {

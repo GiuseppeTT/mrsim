@@ -114,7 +114,7 @@ validate_endogenous_variables <- function(
 is_endogenous_variables <- function(
     x
 ) {
-    result <- any(class(x) == "endogenous_variables")
+    result <- is_subclass_of(x, "endogenous_variables")
 
     return(result)
 }

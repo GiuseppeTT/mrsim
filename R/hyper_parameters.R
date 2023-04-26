@@ -142,7 +142,7 @@ validate_hyper_parameters <- function(
 is_hyper_parameters <- function(
     x
 ) {
-    result <- any(class(x) == "hyper_parameters")
+    result <- is_subclass_of(x, "hyper_parameters")
 
     return(result)
 }

@@ -107,7 +107,7 @@ validate_exogenous_variables <- function(
 is_exogenous_variables <- function(
     x
 ) {
-    result <- any(class(x) == "exogenous_variables")
+    result <- is_subclass_of(x, "exogenous_variables")
 
     return(result)
 }

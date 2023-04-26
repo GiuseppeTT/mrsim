@@ -69,7 +69,7 @@ validate_sample <- function(
 is_sample <- function(
     x
 ) {
-    result <- any(class(x) == "sample")
+    result <- is_subclass_of(x, "sample")
 
     return(result)
 }

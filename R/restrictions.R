@@ -104,7 +104,7 @@ validate_restrictions <- function(
 is_restrictions <- function(
     x
 ) {
-    result <- any(class(x) == "restrictions")
+    result <- is_subclass_of(x, "restrictions")
 
     return(result)
 }
