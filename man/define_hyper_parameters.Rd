@@ -28,5 +28,5 @@ An object of class \code{hyper_parameters}
 Define hyper parameters for simulating mendelian randomization (MR) data.
 }
 \details{
-Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.
+Additional constraints may be posed to the hyper parameter values in order to guarantee that the simulated data is valid.
 }

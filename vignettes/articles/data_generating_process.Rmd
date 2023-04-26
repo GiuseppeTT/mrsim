@@ -58,27 +58,27 @@ $\mathbb{V} G_i = \mathbb{V} U = \mathbb{V} X = \mathbb{V} Y = 1;\; \text{ for }
 
 one can fully calculate the DGP's parameters with the following hyper parameters
 
-- $d$ : Number of $G_i$'s
-- $s$ : Proportion of zero effect $G_i$'s
-- $p$ : Minor allele frequency of $G_i$'s
-- $r_{G \rightarrow X}^2$ : Variance in $X$ explained per non-zero effect $G$
-- $r_{U \rightarrow X}^2$ : Variance in $X$ explained by $U$
-- $r_{U \rightarrow Y}^2$ : Variance in $Y$ explained by $U$
-- $\beta_{X \rightarrow Y}$ : Causal effect of $X$ on $Y$
+- $d$ : (Dimension) Number of $G_i$'s
+- $s$ : (Sparsity) Proportion of zero effect $G_i$'s
+- $p$ : (Skewness) Minor allele frequency of $G_i$'s
+- $r_{G \rightarrow X}^2$ : (Instrument strength) Variance in $X$ explained per non-zero effect $G$
+- $r_{U \rightarrow X}^2$ : (Confouding level) Variance in $X$ explained by $U$
+- $r_{U \rightarrow Y}^2$ : (Confouding level) Variance in $Y$ explained by $U$
+- $\beta_{X \rightarrow Y}$ : (Target causal effect) Causal effect of $X$ on $Y$
 
-These hyper parameters are highly interpretable due to the following reasons
+These hyper parameters are more meaningful due to the following reasons
 
 - Reasonable values for $d$ can be observed from real GWAS data
-- Reasonable values for $s$ can be estimated from real GWAS data or simply accessed by checking multiple values in the $[0, 1]$ inteval
-- Reasonable values for $p$ can be estimated from real GWAS data or simply accessed by checking multiple values in the $[0, 0.5]$ inteval
-- Reasonable values for $r_{G \rightarrow X}^2$ can be estimated from real GWAS data or simply accessed by checking multiple values in the $[0, 1]$ inteval
-- Reasonable values for $r_{U \rightarrow X}^2$ can be accessed by checking multiple values in the $[0, 1]$ inteval
-- Reasonable values for $r_{U \rightarrow Y}^2$ can be accessed by checking multiple values in the $[0, 1]$ inteval
-- $\beta_{X \rightarrow Y}$ is the target causal effect and can be accessed by checking multiple values in the $[-1, 1]$ inteval
+- Reasonable values for $s$ can be estimated from real GWAS data or simply accessed by checking multiple values in the $[0, 1]$ interval
+- Reasonable values for $p$ can be estimated from real GWAS data or simply accessed by checking multiple values in the $[0, 0.5]$ interval
+- Reasonable values for $r_{G \rightarrow X}^2$ can be estimated from real GWAS data or simply accessed by checking multiple values in the $[0, 1]$ interval
+- Reasonable values for $r_{U \rightarrow X}^2$ can be accessed by checking multiple values in the $[0, 1]$ interval
+- Reasonable values for $r_{U \rightarrow Y}^2$ can be accessed by checking multiple values in the $[0, 1]$ interval
+- $\beta_{X \rightarrow Y}$ is the target causal effect and can be accessed by checking multiple values in the $[-1, 1]$ interval
 
 ## Parameters formulas
 
-Given the hyper parameters and retriscitons, the parameters can be calculated as following
+Given the hyper parameters and restrictions, the parameters can be calculated as following
 
 ### SNPs
 

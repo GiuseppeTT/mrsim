@@ -2,7 +2,7 @@
 #'
 #' Calculate parameters for simulating mendelian randomization (MR) data from the given hyper parameters and restrictions.
 #'
-#' Additional constraints may be posed to the parameters values in order to garantee that the simulated data is valid.
+#' Additional constraints may be posed to the parameters values in order to guarantee that the simulated data is valid.
 #'
 #' @param hyper_parameters An object of class `hyper_parameters`
 #' @param restrictions An object of class `restrictions`
@@ -66,7 +66,7 @@ calculate_parameters <- function(
 #'
 #' Define parameters for simulating mendelian randomization (MR) data.
 #'
-#' Additional constraints may be posed to the parameter values in order to garantee that the simulated data is valid.
+#' Additional constraints may be posed to the parameter values in order to guarantee that the simulated data is valid.
 #'
 #' @param m Number of non-zero effect G's. It should be a positive integer
 #' @param k Number of zero effect G's. It should be a positive integer

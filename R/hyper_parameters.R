@@ -2,7 +2,7 @@
 #'
 #' Define hyper parameters for simulating mendelian randomization (MR) data.
 #'
-#' Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.
+#' Additional constraints may be posed to the hyper parameter values in order to guarantee that the simulated data is valid.
 #'
 #' @param d (Dimension) Number of G's. It should be a positive integer
 #' @param s (Sparsity) Proportion of zero effect G's. It should be between `0` and `1`
