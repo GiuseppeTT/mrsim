@@ -21,6 +21,12 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/data_generating_process.html">data_generating_process</a>
+  </div>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -48,37 +54,37 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">define_hyper_parameters</span><span class="op">(</span><span class="va">m</span>, <span class="va">k</span>, <span class="va">p</span>, <span class="va">r2_g_x</span>, <span class="va">r2_u_x</span>, <span class="va">r2_u_y</span>, <span class="va">beta_x_y</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">define_hyper_parameters</span><span class="op">(</span><span class="va">d</span>, <span class="va">s</span>, <span class="va">p</span>, <span class="va">r2_g_x</span>, <span class="va">r2_u_x</span>, <span class="va">r2_u_y</span>, <span class="va">beta_x_y</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>m</dt>
-<dd><p>Number of non-zero effect G's. It should be a positive integer</p></dd>
+    <dl><dt>d</dt>
+<dd><p>(Dimension) Number of G's. It should be a positive integer</p></dd>
 
 
-<dt>k</dt>
-<dd><p>Number of zero effect G's. It should be a positive integer</p></dd>
+<dt>s</dt>
+<dd><p>(Sparsity) Proportion of zero effect G's. It should be between <code>0</code> and <code>1</code></p></dd>
 
 
 <dt>p</dt>
-<dd><p>Minor allele frequency. It should be between <code>0</code> and <code>0.5</code></p></dd>
+<dd><p>(Skewness) Minor allele frequency of G'. It should be between <code>0</code> and <code>0.5</code></p></dd>
 
 
 <dt>r2_g_x</dt>
-<dd><p>Variance in X explained per G. It should be between <code>0</code> and <code>1 / m</code></p></dd>
+<dd><p>(Instrument strength) Variance in X explained per non-zero effect G. It should be between <code>0</code> and <code>1 / ceiling((1 - s) * d)</code></p></dd>
 
 
 <dt>r2_u_x</dt>
-<dd><p>Variance in X explained by U. It should be between <code>0</code> and <code>1</code></p></dd>
+<dd><p>(Confouding level) Variance in X explained by U. It should be between <code>0</code> and <code>1</code></p></dd>
 
 
 <dt>r2_u_y</dt>
-<dd><p>Variance in Y explained by U. It should be between <code>0</code> and <code>1</code></p></dd>
+<dd><p>(Confouding level) Variance in Y explained by U. It should be between <code>0</code> and <code>1</code></p></dd>
 
 
 <dt>beta_x_y</dt>
-<dd><p>(Targeted causal effect) Causal effect of X on Y. It should be between <code>- 1 / sqrt(r2_g_x)</code> and <code>1 / sqrt(r2_g_x)</code>. Since all variables are standardized, a more reasonable range is between <code>-1</code> and <code>1</code></p></dd>
+<dd><p>(Target causal effect) Causal effect of X on Y. It should be between <code>- 1 / sqrt(r2_g_x)</code> and <code>1 / sqrt(r2_g_x)</code>. Since all variables are standardized, a more reasonable range is between <code>-1</code> and <code>1</code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -91,7 +97,7 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.</p>
+    <p>Additional constraints may be posed to the hyper parameter values in order to guarantee that the simulated data is valid.</p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

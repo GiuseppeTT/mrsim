@@ -47,6 +47,12 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/data_generating_process.html">data_generating_process</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
@@ -73,7 +79,7 @@
 </div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The goal of <code>mrsim</code> is to simulate mendelian randomization (MR) data using meaningful hyper parameters.</p>
+<p>The goal of <code>mrsim</code> is to simulate mendelian randomization (MR) data using meaningful hyper parameters. You can check the theory behind the package at <code><a href="articles/data_generating_process.html">vignette("data_generating_process")</a></code>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -93,8 +99,8 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">hyper_parameters</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/define_hyper_parameters.html">define_hyper_parameters</a></span><span class="op">(</span></span>
-<span>    m <span class="op">=</span> <span class="fl">500</span>,</span>
-<span>    k <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>    d <span class="op">=</span> <span class="fl">1e3</span>,</span>
+<span>    s <span class="op">=</span> <span class="fl">50</span> <span class="op">/</span> <span class="fl">100</span>,</span>
 <span>    p <span class="op">=</span> <span class="fl">25</span> <span class="op">/</span> <span class="fl">100</span>,</span>
 <span>    r2_g_x <span class="op">=</span> <span class="fl">0.01</span> <span class="op">/</span> <span class="fl">100</span>,</span>
 <span>    r2_u_x <span class="op">=</span> <span class="fl">30</span> <span class="op">/</span> <span class="fl">100</span>,</span>
@@ -105,13 +111,13 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">hyper_parameters</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Hyper parameters</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Number of non-zero effect G's (m): 500</span></span>
-<span><span class="co">#&gt; Number of zero effect G's (k): 500</span></span>
-<span><span class="co">#&gt; Minor allele frequency of G's (p): 0.25</span></span>
-<span><span class="co">#&gt; Variance in X explained per G (r2_g_x): 1e-04</span></span>
-<span><span class="co">#&gt; Variance in X explained by U (r2_u_x): 0.3</span></span>
-<span><span class="co">#&gt; Variance in Y explained by U (r2_u_y): 0.3</span></span>
-<span><span class="co">#&gt; Causal effect of X on Y (beta_x_y): 0.2 (targeted causal effect)</span></span>
+<span><span class="co">#&gt; (Dimension) Number of G's (d): 1000</span></span>
+<span><span class="co">#&gt; (Sparsity) Proportion of zero effect G's (s): 0.5</span></span>
+<span><span class="co">#&gt; (Skewness) Minor allele frequency of G' (p): 0.25</span></span>
+<span><span class="co">#&gt; (Instrument strength) Variance in X explained per non-zero effect G (r2_g_x): 1e-04</span></span>
+<span><span class="co">#&gt; (Confouding level) Variance in X explained by U (r2_u_x): 0.3</span></span>
+<span><span class="co">#&gt; (Confouding level) Variance in Y explained by U (r2_u_y): 0.3</span></span>
+<span><span class="co">#&gt; (Target causal effect) Causal effect of X on Y (beta_x_y): 0.2</span></span>
 <span></span>
 <span><span class="va">restrictions</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/define_restrictions.html">define_restrictions</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -143,10 +149,10 @@
 <span><span class="co">#&gt; X noise variance (sigma2_x): 0.65</span></span>
 <span><span class="co">#&gt; Y intercept (alpha_y): 0</span></span>
 <span><span class="co">#&gt; Causal effect of U on Y (beta_u_y): 0.438178</span></span>
-<span><span class="co">#&gt; Causal effect of X on Y (beta_x_y): 0.2 (targeted causal effect)</span></span>
+<span><span class="co">#&gt; Causal effect of X on Y (beta_x_y): 0.2</span></span>
 <span><span class="co">#&gt; Y noise variance (sigma2_y): 0.672</span></span>
 <span></span>
-<span><span class="va">sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_sample.html">generate_sample</a></span><span class="op">(</span><span class="va">parameters</span>,n <span class="op">=</span> <span class="fl">10e3</span><span class="op">)</span></span>
+<span><span class="va">sample</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/generate_sample.html">generate_sample</a></span><span class="op">(</span><span class="va">parameters</span>, n <span class="op">=</span> <span class="fl">10e3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sample</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # Sample</span></span>
