@@ -1,6 +1,6 @@
 hyper_parameters <- define_hyper_parameters(
-    m = 500,
-    k = 500,
+    d = 1e3,
+    s = 50 / 100,
     p = 25 / 100,
     r2_g_x = 0.01 / 100,
     r2_u_x = 30 / 100,

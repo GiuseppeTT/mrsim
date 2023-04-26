@@ -43,7 +43,7 @@ define_parameters(
 
 \item{beta_u_y}{Causal effect of U on Y. It should be a number}
 
-\item{beta_x_y}{(Targeted causal effect) Causal effect of X on Y. It should be a number}
+\item{beta_x_y}{Causal effect of X on Y. It should be a number}
 
 \item{sigma2_y}{Variance of Y noise. It should be a positive number}
 }
