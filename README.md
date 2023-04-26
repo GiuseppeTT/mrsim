@@ -161,3 +161,8 @@ real_beta_x_y <- get_beta_x_y(parameters)
 print(real_beta_x_y)
 #> [1] 0.2
 ```
+
+## Data generating process
+
+To better understand the hyper parameters and how the data is generated,
+check `vignette("data_generating_process")`.
