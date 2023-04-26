@@ -2,7 +2,7 @@
 #'
 #' Define restrictions for simulating mendelian randomization (MR) data.
 #'
-#' Additional constraints may be posed to the restrictions values in order to garantee that the simulated data is valid.
+#' Additional constraints may be posed to the restrictions values in order to guarantee that the simulated data is valid.
 #'
 #' @return An object of class `restrictions`
 #'
@@ -104,7 +104,7 @@ validate_restrictions <- function(
 is_restrictions <- function(
     x
 ) {
-    result <- any(class(x) == "restrictions")
+    result <- is_subclass_of(x, "restrictions")
 
     return(result)
 }

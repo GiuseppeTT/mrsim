@@ -13,6 +13,7 @@ RoxygenNote: 7.2.3
 Imports:
     stats
 Suggests:
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://giuseppett.github.io/mrsim/, https://github.com/GiuseppeTT/mrsim

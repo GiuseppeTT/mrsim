@@ -13,5 +13,5 @@ An object of class \code{restrictions}
 Define restrictions for simulating mendelian randomization (MR) data.
 }
 \details{
-Additional constraints may be posed to the restrictions values in order to garantee that the simulated data is valid.
+Additional constraints may be posed to the restrictions values in order to guarantee that the simulated data is valid.
 }

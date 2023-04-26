@@ -1,9 +1,9 @@
 format_vector <- function(
     x
 ) {
-    if (length(x) == 1) {
+    if (is_lengthed_as(x, 1)) {
         formatted_x <- paste0("[", x[1], "]")
-    } else if (length(x) == 2) {
+    } else if (is_lengthed_as(x, 2)) {
         formatted_x <- paste0("[", x[1], ", ", x[2], "]")
     } else {
         formatted_x <- paste0("[", x[1], ", ..., ", x[length(x)], "]")
@@ -18,11 +18,11 @@ format_vector <- function(
 format_matrix <- function(
     x
 ) {
-    if (nrow(x) == 1 && ncol(x) == 1) {
+    if (is_dimentioned_as(x, 1, 1)) {
         formatted_x <- paste0("[[", x[1, 1], "]]")
-    } else if (nrow(x) == 2 && ncol(x) == 1) {
+    } else if (is_dimentioned_as(x, 2, 1)) {
         formatted_x <- paste0("[[", x[1, 1], ", ", x[2, 1], "]]")
-    } else if (nrow(x) == 1 && ncol(x) == 2) {
+    } else if (is_dimentioned_as(x, 1, 2)) {
         formatted_x <- paste0("[[", x[1, 1], ", ", x[1, 2], "]]")
     } else {
         formatted_x <- paste0("[[", x[1, 1], ", ..., ", x[nrow(x), ncol(x)], "]]")

@@ -2,7 +2,7 @@
 #'
 #' Calculate parameters for simulating mendelian randomization (MR) data from the given hyper parameters and restrictions.
 #'
-#' Additional constraints may be posed to the parameters values in order to garantee that the simulated data is valid.
+#' Additional constraints may be posed to the parameters values in order to guarantee that the simulated data is valid.
 #'
 #' @param hyper_parameters An object of class `hyper_parameters`
 #' @param restrictions An object of class `restrictions`
@@ -14,19 +14,21 @@ calculate_parameters <- function(
     hyper_parameters,
     restrictions
 ) {
-    m <- hyper_parameters$m
-    k <- hyper_parameters$k
+    d <- hyper_parameters$d
+    s <- hyper_parameters$s
     p <- hyper_parameters$p
     r2_g_x <- hyper_parameters$r2_g_x
     r2_u_x <- hyper_parameters$r2_u_x
     r2_u_y <- hyper_parameters$r2_u_y
     beta_x_y <- hyper_parameters$beta_x_y
 
-    total_r2_g_x <- m * r2_g_x
+    m <- ceiling((1 - s) * d)
+    k <- d - m
 
     alpha_u <- 0
     sigma2_u <- 1
 
+    total_r2_g_x <- m * r2_g_x
     alpha_x <- 0
     betaprime_g_x <- c(rep_len(1, m), rep_len(0, k))
     beta_g_x <- betaprime_g_x * sqrt(total_r2_g_x / sum(betaprime_g_x^2))
@@ -64,7 +66,7 @@ calculate_parameters <- function(
 #'
 #' Define parameters for simulating mendelian randomization (MR) data.
 #'
-#' Additional constraints may be posed to the parameter values in order to garantee that the simulated data is valid.
+#' Additional constraints may be posed to the parameter values in order to guarantee that the simulated data is valid.
 #'
 #' @param m Number of non-zero effect G's. It should be a positive integer
 #' @param k Number of zero effect G's. It should be a positive integer
@@ -77,7 +79,7 @@ calculate_parameters <- function(
 #' @param sigma2_x Variance of X noise. It should be a positive number
 #' @param alpha_y Intercept of Y. It should be a number
 #' @param beta_u_y Causal effect of U on Y. It should be a number
-#' @param beta_x_y (Targeted causal effect) Causal effect of X on Y. It should be a number
+#' @param beta_x_y Causal effect of X on Y. It should be a number
 #' @param sigma2_y Variance of Y noise. It should be a positive number
 #'
 #' @return An object of class `parameters`
@@ -262,24 +264,24 @@ validate_parameters_hyper_parameters <- function(
     beta_x_y <- parameters$beta_x_y
     sigma2_y <- parameters$sigma2_y
 
-    hp_m <- hyper_parameters$m
-    hp_k <- hyper_parameters$k
+    d <- hyper_parameters$d
+    s <- hyper_parameters$s
     hp_p <- hyper_parameters$p
     r2_g_x <- hyper_parameters$r2_g_x
     r2_u_x <- hyper_parameters$r2_u_x
     r2_u_y <- hyper_parameters$r2_u_y
     hp_beta_x_y <- hyper_parameters$beta_x_y
 
-    if (m != hp_m) {
-        stop("Parameter `m` should be equal to hyper parameter `m`")
+    if (d != m + k) {
+        stop("Hyper parameter `d` should be equal to `m + k`")
     }
 
-    if (k != hp_k) {
-        stop("Parameter `k` should be equal to hyper parameter `k`")
+    if (! is_close(s, k / (m + k), tolerance = 1 / d)) {
+        stop("Hyper parameter `s` should be close to `k / (m + k)`")
     }
 
-    if (p != hp_p) {
-        stop("Parameter `p` should be equal to hyper parameter `p`")
+    if (hp_p != p) {
+        stop("Hyper parameter `p` should be equal to parameter `p`")
     }
 }
 
@@ -363,7 +365,7 @@ validate_parameters_restrictions <- function(
 is_parameters <- function(
     x
 ) {
-    result <- any(class(x) == "parameters")
+    result <- is_subclass_of(x, "parameters")
 
     return(result)
 }
@@ -390,7 +392,7 @@ print.parameters <- function(
     cat("X noise variance (sigma2_x): ", x$sigma2_x, "\n", sep = "")
     cat("Y intercept (alpha_y): ", x$alpha_y, "\n", sep = "")
     cat("Causal effect of U on Y (beta_u_y): ", x$beta_u_y, "\n", sep = "")
-    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, " (targeted causal effect)", "\n", sep = "")
+    cat("Causal effect of X on Y (beta_x_y): ", x$beta_x_y, "\n", sep = "")
     cat("Y noise variance (sigma2_y): ", x$sigma2_y, sep = "")
 }
 

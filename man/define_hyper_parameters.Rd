@@ -4,22 +4,22 @@
 \alias{define_hyper_parameters}
 \title{Define hyper parameters}
 \usage{
-define_hyper_parameters(m, k, p, r2_g_x, r2_u_x, r2_u_y, beta_x_y)
+define_hyper_parameters(d, s, p, r2_g_x, r2_u_x, r2_u_y, beta_x_y)
 }
 \arguments{
-\item{m}{Number of non-zero effect G's. It should be a positive integer}
+\item{d}{(Dimension) Number of G's. It should be a positive integer}
 
-\item{k}{Number of zero effect G's. It should be a positive integer}
+\item{s}{(Sparsity) Proportion of zero effect G's. It should be between \code{0} and \code{1}}
 
-\item{p}{Minor allele frequency. It should be between \code{0} and \code{0.5}}
+\item{p}{(Skewness) Minor allele frequency of G'. It should be between \code{0} and \code{0.5}}
 
-\item{r2_g_x}{Variance in X explained per G. It should be between \code{0} and \code{1 / m}}
+\item{r2_g_x}{(Instrument strength) Variance in X explained per non-zero effect G. It should be between \code{0} and \code{1 / ceiling((1 - s) * d)}}
 
-\item{r2_u_x}{Variance in X explained by U. It should be between \code{0} and \code{1}}
+\item{r2_u_x}{(Confouding level) Variance in X explained by U. It should be between \code{0} and \code{1}}
 
-\item{r2_u_y}{Variance in Y explained by U. It should be between \code{0} and \code{1}}
+\item{r2_u_y}{(Confouding level) Variance in Y explained by U. It should be between \code{0} and \code{1}}
 
-\item{beta_x_y}{(Targeted causal effect) Causal effect of X on Y. It should be between \code{- 1 / sqrt(r2_g_x)} and \code{1 / sqrt(r2_g_x)}. Since all variables are standardized, a more reasonable range is between \code{-1} and \code{1}}
+\item{beta_x_y}{(Target causal effect) Causal effect of X on Y. It should be between \code{- 1 / sqrt(r2_g_x)} and \code{1 / sqrt(r2_g_x)}. Since all variables are standardized, a more reasonable range is between \code{-1} and \code{1}}
 }
 \value{
 An object of class \code{hyper_parameters}
@@ -28,5 +28,5 @@ An object of class \code{hyper_parameters}
 Define hyper parameters for simulating mendelian randomization (MR) data.
 }
 \details{
-Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.
+Additional constraints may be posed to the hyper parameter values in order to guarantee that the simulated data is valid.
 }

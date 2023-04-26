@@ -7,7 +7,8 @@
 <!-- badges: end -->
 
 The goal of `mrsim` is to simulate mendelian randomization (MR) data
-using meaningful hyper parameters.
+using meaningful hyper parameters. You can check the theory behind the
+package at `vignette("data_generating_process")`.
 
 ## Installation
 
@@ -32,8 +33,8 @@ library(mrsim)
 set.seed(42)
 
 hyper_parameters <- define_hyper_parameters(
-    m = 500,
-    k = 500,
+    d = 1e3,
+    s = 50 / 100,
     p = 25 / 100,
     r2_g_x = 0.01 / 100,
     r2_u_x = 30 / 100,
@@ -44,13 +45,13 @@ hyper_parameters <- define_hyper_parameters(
 print(hyper_parameters)
 #> # Hyper parameters
 #> 
-#> Number of non-zero effect G's (m): 500
-#> Number of zero effect G's (k): 500
-#> Minor allele frequency of G's (p): 0.25
-#> Variance in X explained per G (r2_g_x): 1e-04
-#> Variance in X explained by U (r2_u_x): 0.3
-#> Variance in Y explained by U (r2_u_y): 0.3
-#> Causal effect of X on Y (beta_x_y): 0.2 (targeted causal effect)
+#> (Dimension) Number of G's (d): 1000
+#> (Sparsity) Proportion of zero effect G's (s): 0.5
+#> (Skewness) Minor allele frequency of G' (p): 0.25
+#> (Instrument strength) Variance in X explained per non-zero effect G (r2_g_x): 1e-04
+#> (Confouding level) Variance in X explained by U (r2_u_x): 0.3
+#> (Confouding level) Variance in Y explained by U (r2_u_y): 0.3
+#> (Target causal effect) Causal effect of X on Y (beta_x_y): 0.2
 
 restrictions <- define_restrictions()
 
@@ -82,10 +83,10 @@ print(parameters)
 #> X noise variance (sigma2_x): 0.65
 #> Y intercept (alpha_y): 0
 #> Causal effect of U on Y (beta_u_y): 0.438178
-#> Causal effect of X on Y (beta_x_y): 0.2 (targeted causal effect)
+#> Causal effect of X on Y (beta_x_y): 0.2
 #> Y noise variance (sigma2_y): 0.672
 
-sample <- generate_sample(parameters,n = 10e3)
+sample <- generate_sample(parameters, n = 10e3)
 
 print(sample)
 #> # Sample
