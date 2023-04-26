@@ -5,8 +5,8 @@
 #' Additional constraints may be posed to the hyper parameter values in order to garantee that the simulated data is valid.
 #'
 #' @param d (Dimension) Number of G's. It should be a positive integer
-#' @param s (Sparsity) Percentage of zero effect G's. It should be between `0` and `1`
-#' @param p (Skewness) Minor allele frequency. It should be between `0` and `0.5`
+#' @param s (Sparsity) Proportion of zero effect G's. It should be between `0` and `1`
+#' @param p (Skewness) Minor allele frequency of G'. It should be between `0` and `0.5`
 #' @param r2_g_x (Instrument strength) Variance in X explained per non-zero effect G. It should be between `0` and `1 / ceiling((1 - s) * d)`
 #' @param r2_u_x (Confouding level) Variance in X explained by U. It should be between `0` and `1`
 #' @param r2_u_y (Confouding level) Variance in Y explained by U. It should be between `0` and `1`
@@ -159,8 +159,8 @@ print.hyper_parameters <- function(
     cat(header, " Hyper parameters", "\n", sep = "")
     cat("\n", sep = "")
     cat("(Dimension) Number of G's (d): ", x$d, "\n", sep = "")
-    cat("(Sparsity) Percentage of zero effect G's (s): ", x$s, "\n", sep = "")
-    cat("(Skewness) Minor allele frequency: ", x$p, "\n", sep = "")
+    cat("(Sparsity) Proportion of zero effect G's (s): ", x$s, "\n", sep = "")
+    cat("(Skewness) Minor allele frequency of G' (p): ", x$p, "\n", sep = "")
     cat("(Instrument strength) Variance in X explained per non-zero effect G (r2_g_x): ", x$r2_g_x, "\n", sep = "")
     cat("(Confouding level) Variance in X explained by U (r2_u_x): ", x$r2_u_x, "\n", sep = "")
     cat("(Confouding level) Variance in Y explained by U (r2_u_y): ", x$r2_u_y, "\n", sep = "")

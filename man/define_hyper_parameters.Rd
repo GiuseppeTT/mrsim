@@ -9,9 +9,9 @@ define_hyper_parameters(d, s, p, r2_g_x, r2_u_x, r2_u_y, beta_x_y)
 \arguments{
 \item{d}{(Dimension) Number of G's. It should be a positive integer}
 
-\item{s}{(Sparsity) Percentage of zero effect G's. It should be between \code{0} and \code{1}}
+\item{s}{(Sparsity) Proportion of zero effect G's. It should be between \code{0} and \code{1}}
 
-\item{p}{(Skewness) Minor allele frequency. It should be between \code{0} and \code{0.5}}
+\item{p}{(Skewness) Minor allele frequency of G'. It should be between \code{0} and \code{0.5}}
 
 \item{r2_g_x}{(Instrument strength) Variance in X explained per non-zero effect G. It should be between \code{0} and \code{1 / ceiling((1 - s) * d)}}
 

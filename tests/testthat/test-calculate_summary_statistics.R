@@ -14,7 +14,7 @@ restrictions <- define_restrictions()
 
 parameters <- calculate_parameters(hyper_parameters, restrictions)
 
-sample <- generate_sample(parameters,n = 10e3)
+sample <- generate_sample(parameters, n = 10e3)
 
 summary_statistics <- calculate_summary_statistics(sample)
 
